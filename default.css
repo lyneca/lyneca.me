@@ -1,0 +1,60 @@
+body {
+  background-color: rgb(42, 42, 51);
+  font-family: 'Open Sans', sans-serif;
+  color: rgb(136, 136, 136);
+}
+
+h1 {
+  color: rgb(180, 180, 180);
+  font-weight: normal;
+  margin: auto;
+  width: 700px;
+  font-size: 60px;
+  text-align: center;
+}
+
+#fb_login_button {
+  background-color: #3b5998;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  width: 200px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#status {
+  margin-top: 20px;
+}
+
+#description {
+  font-style: italic;
+  margin-top: 5px;
+  margin-bottom: 40px;
+}
+
+#container {
+  text-align: center;
+  width: 800px;
+  margin: auto;
+}
+
+#likes_text  {
+  font-size: 40px;
+}
+
+#total_likes_field {
+  font-size: 60px;
+  color: rgb(200, 200, 200);
+}
+
+#post_number {
+  color: rgb(200, 200, 200);
+}
+
+div {
+  display: block;
+}

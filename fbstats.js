@@ -12,7 +12,7 @@ function addToLikes(response) {
                 },
                 function(response) {
                     total_likes += response.summary.total_count
-                    $('#post_number').text("Posts counted: " + post)
+                    $('#post_number').text(post)
                     $('#total_likes_field').text(total_likes)
                 }
             );
@@ -45,15 +45,20 @@ function countLikes() {
     );
 }
 
+
 function statusChangeCallback(response) {
     if (response.status === 'connected') {
         console.log("Connected.");
+        countLikes();
+        $(this).animate({
+            backgroundColor: '#3b9859'
+        }, 200);
     } else if (response.status === 'not_authorized') {
         document.getElementById('status').innerHTML = 'Please log ' +
             'into this app.';
     } else {
         document.getElementById('status').innerHTML = 'Please log ' +
-            'into Facebook.';
+            'into Facebook to use this app.';
     }
 }
 

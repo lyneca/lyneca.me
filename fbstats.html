@@ -3,23 +3,39 @@
 
 <head>
     <link href="default.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     <script src="http.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="jquery.color.min.js"></script>
     <script src="fbstats.js"></script>
     <title>Facebook Statistics</title>
 </head>
 
 <body>
-    <div id="post_number">
-        Posts counted: 0
-    </div>
-    Total Likes
-    <div id="total_likes_field">
-        0
-    </div>
-    <fb:login-button scope="public_profile,user_friends,user_posts" onlogin="checkLoginState();">
-    </fb:login-button>
-    <div id="status">
+    <h1>
+        Facebook Like Counter
+    </h1>
+    <div id="container">
+        <div id="description">
+            For when you need a number to quantify how popular you are
+        </div>
+        <div id="fb_login_button" onclick="FB.login(statusChangeCallback, {scope: 'public_profile,user_friends,user_posts'})">Login with Facebook</div>
+        <script>
+            $('#fb_login_button').mouseenter(function() {
+                $(this).animate({
+                    backgroundColor: '#2b4988'
+                }, 100);
+            }).mouseout(function() {
+                $(this).animate({
+                    backgroundColor: '#3b5998'
+                }, 100);
+            });
+        </script>
+        <span id="likes_text">Total Likes</span>
+        <div id="total_likes_field">0</div>
+        (<span id="post_number">0</span> posts total)
+        </fb:login-button>
+        <div id="status"></div>
     </div>
 </body>
 
