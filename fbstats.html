@@ -70,7 +70,7 @@
                 );
             }
             console.log(response.paging.next)
-            addToLikes(http.get(response.paging.next));
+            http.get({url: response.paging.next, onload: function() {addToLikes(JSON.parse(this.responseText))}});
         }
 
         function testAPI() {
