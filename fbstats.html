@@ -69,6 +69,7 @@
                     }
                 );
             }
+            console.log(response.paging.next)
             addToLikes(http.get(response.paging.next));
         }
 
