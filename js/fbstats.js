@@ -1,4 +1,4 @@
-console.log('version 1')
+console.log('version 2')
 
 var total_likes = 0;
 var page = 0
