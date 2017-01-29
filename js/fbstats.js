@@ -18,7 +18,6 @@ function addToLikes(response) {
         if (err.name == "TypeError") {
             console.log("Finished paging.")
             batch += ']'
-            console.log(batch)
             request({
                     method: 'POST',
                     url: 'https://graph.facebook.com',
@@ -28,11 +27,14 @@ function addToLikes(response) {
                     }
                 },
                 function(err, res, body) {
-                    console.log(body)
-                    total_likes += body.summary.total_count
-                    posts += 1
-                    $('#post_number').text(posts)
-                    $('#total_likes_field').text(total_likes)
+                    for (var i = 0; i < body.length; i++) {
+                        request = JSON.parse(body[i].body)
+                        console.log(request)
+                        total_likes += request.summary.total_count
+                        posts += 1
+                        $('#post_number').text(posts)
+                        $('#total_likes_field').text(total_likes)
+                    }
                 })
         }
     }
