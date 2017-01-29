@@ -72,9 +72,8 @@
                                 'summary': 'true'
                             },
                             function(response) {
-                                console.log(response)
                                 total_likes += response.summary.total_count
-                                $('#total_likes_field').val(total_likes)
+                                $('#total_likes_field').text(total_likes)
                             }
                         );
                 }
