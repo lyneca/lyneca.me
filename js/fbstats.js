@@ -15,6 +15,7 @@ function addToLikes(response) {
             addToLikes(JSON.parse(body))
         });
     } catch (err) {
+        console.log(err)
         if (err.name == "TypeError") {
             console.log("Finished paging.")
             batch += ']'
