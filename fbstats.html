@@ -101,7 +101,7 @@
                             },
                             function (response) {
                               console.log(response)
-                              // $('#posts').append('<li>' + response.summary + '</li>')
+                              $('#posts').append('<li>' + response.summary.total_count + '</li>')
                             }
                         );
                 }
