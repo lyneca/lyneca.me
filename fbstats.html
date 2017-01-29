@@ -100,7 +100,8 @@
                               'summary': 'true'
                             },
                             function (response) {
-                              $('#posts').append('<li>' + response.summary.total_count + '</li>')
+                              console.log(response.summary)
+                              // $('#posts').append('<li>' + response.summary + '</li>')
                             }
                         );
                 }
