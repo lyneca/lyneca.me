@@ -39,6 +39,7 @@ function countLikes() {
     console.log('Getting post list...');
     total_likes = 0
     posts = 0
+    page = 0
     FB.api(
         '/me/posts/',
         'GET', {

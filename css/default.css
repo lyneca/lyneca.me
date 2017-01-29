@@ -55,6 +55,26 @@ h1 {
   color: rgb(200, 200, 200);
 }
 
+#footer {
+  position: fixed;
+  height: 40px;
+  bottom: 0px;
+  margin-left: 10px;
+}
+
+a:link, a:active, a:visited {
+  text-decoration: none;
+  color: rgb(150, 150, 150);
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: rgb(200, 200, 200);
+}
+
 div {
   display: block;
 }
