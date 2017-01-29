@@ -95,7 +95,7 @@
                 function(response) {
                     for (var i = 0; i < response.data.length; i++)
                         FB.api(
-                            '/' + response.data[i] + '/likes',
+                            '/' + response.data[i].id + '/likes',
                             'GET', {
                               'summary': 'true'
                             },
