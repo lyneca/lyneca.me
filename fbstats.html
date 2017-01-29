@@ -10,7 +10,7 @@
 
 <body>
     <div id="total_likes_field">
-      0
+        0
     </div>
     <script>
         var total_likes = 0;
@@ -56,27 +56,33 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
+        function addToLikes(response) {
+            for (var i = 0; i < response.data.length; i++) {
+                FB.api(
+                    '/' + response.data[i].id + '/likes',
+                    'GET', {
+                        'summary': 'true'
+                    },
+                    function(response) {
+                        total_likes += response.summary.total_count
+                        $('#total_likes_field').text(total_likes)
+                    }
+                );
+            }
+            console.log(response.paging.next)
+            addToLikes(http.get(response.paging.next));
+        }
+
         function testAPI() {
-            console.log('Welcome!  Fetching your information.... ');
+            console.log('grabbing yer data');
             FB.api(
                 '/me/posts/',
-                'GET', {
+                'GET',
+                {
                     "limit": "275",
                     "fields": "id"
                 },
-                function(response) {
-                    for (var i = 0; i < response.data.length; i++)
-                        FB.api(
-                            '/' + response.data[i].id + '/likes',
-                            'GET', {
-                                'summary': 'true'
-                            },
-                            function(response) {
-                                total_likes += response.summary.total_count
-                                $('#total_likes_field').text(total_likes)
-                            }
-                        );
-                }
+                addToLikes
             );
         }
     </script>
