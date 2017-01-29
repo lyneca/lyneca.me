@@ -39,7 +39,7 @@ function countLikes() {
     console.log('Getting post list...');
     total_likes = 0
     posts = 0
-    batch = 'batch=['
+    batch = '['
     FB.api(
         '/me/posts/',
         'GET', {
