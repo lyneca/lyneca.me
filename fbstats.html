@@ -14,7 +14,7 @@
     </div>
     <script>
         var total_likes = 0;
-
+        var page = 0
         function statusChangeCallback(response) {
             console.log('statusChangeCallback');
             console.log(response);
@@ -69,12 +69,20 @@
                     }
                 );
             }
-            console.log(response.paging.next)
-            http.get({url: response.paging.next, onload: function() {addToLikes(JSON.parse(this.responseText))}});
+            page += 1
+            console.log("Page " + page)
+            try {
+                http.get({url: response.paging.next, onload: function() {addToLikes(JSON.parse(this.responseText))}});
+            } catch (err) {
+              if (err.name == "TypeError") {
+                console.log("Finished paging.")
+              }
+            }
         }
 
         function testAPI() {
-            console.log('grabbing yer data');
+            console.log('Getting post list...');
+
             FB.api(
                 '/me/posts/',
                 'GET',
