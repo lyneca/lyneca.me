@@ -14,6 +14,7 @@ function addToLikes(response) {
             method: 'GET',
             url: response.paging.next
         }, function(err, res, body) {
+            console.log(err)
             addToLikes(JSON.parse(body))
         });
     } catch (err) {
