@@ -1,22 +1,11 @@
 var total_likes = 0;
 var page = 0
 var posts = 0
-
+var accessToken;
 function addToLikes(response) {
     try {
         for (var i = 0; i < response.data.length; i++) {
-            FB.api(
-                '/' + response.data[i].id + '/likes',
-                'GET', {
-                    'summary': 'true'
-                },
-                function(response) {
-                    total_likes += response.summary.total_count
-                    posts += 1
-                    $('#post_number').text(posts)
-                    $('#total_likes_field').text(total_likes)
-                }
-            );
+            batch += '{"method":"GET", "relative_url":"/' + response.data[i].id + '/likes?summary=true"}, '
         }
         page += 1
         console.log("Page " + page)
@@ -29,6 +18,19 @@ function addToLikes(response) {
     } catch (err) {
         if (err.name == "TypeError") {
             console.log("Finished paging.")
+            batch += ']'
+            console.log(batch)
+            http.post({
+                url: "https://graph.facebook.com",
+                data: JSON.stringify({'access_token': accessToken, 'batch': batch}),
+                onload: function(response) {
+                    console.log(response)
+                    total_likes += response.summary.total_count
+                    posts += 1
+                    $('#post_number').text(posts)
+                    $('#total_likes_field').text(total_likes)
+                }
+            })
         }
     }
 }
@@ -37,6 +39,7 @@ function countLikes() {
     console.log('Getting post list...');
     total_likes = 0
     posts = 0
+    batch = 'batch=['
     FB.api(
         '/me/posts/',
         'GET', {
@@ -50,6 +53,7 @@ function countLikes() {
 
 function statusChangeCallback(response) {
     if (response.status === 'connected') {
+        accessToken = response.authResponse.accessToken;
         console.log("Connected.");
         countLikes();
         $(this).animate({
