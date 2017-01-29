@@ -10,10 +10,7 @@ function addToLikes(response) {
         }
         page += 1
         console.log("Page " + page)
-        request({
-            method: 'GET',
-            url: response.paging.next
-        }, function(err, res, body) {
+        request(response.paging.next, function(err, res, body) {
             console.log(err)
             addToLikes(JSON.parse(body))
         });
