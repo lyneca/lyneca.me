@@ -17,6 +17,7 @@ function addToLikes(response) {
                     posts += 1
                     $('#post_number').text(posts)
                     $('#total_likes_field').text(total_likes)
+                    $('#likes_per_post').text(Math.round(total_likes / posts * 10) / 10)
                 }
             );
         }
