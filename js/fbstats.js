@@ -12,6 +12,7 @@ function addToLikes(response) {
                 },
                 function(response) {
                     total_likes += response.summary.total_count
+                    post += 1
                     $('#post_number').text(post)
                     $('#total_likes_field').text(total_likes)
                 }
@@ -34,7 +35,8 @@ function addToLikes(response) {
 
 function countLikes() {
     console.log('Getting post list...');
-
+    total_likes = 0
+    post = 0
     FB.api(
         '/me/posts/',
         'GET', {
