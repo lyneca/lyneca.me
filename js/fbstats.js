@@ -2,6 +2,7 @@ var total_likes = 0;
 var page = 0
 var posts = 0
 var accessToken;
+
 function addToLikes(response) {
     try {
         for (var i = 0; i < response.data.length; i++) {
@@ -9,28 +10,32 @@ function addToLikes(response) {
         }
         page += 1
         console.log("Page " + page)
-        http.get({
-            url: response.paging.next,
-            onload: function() {
-                addToLikes(JSON.parse(this.responseText))
-            }
+        request({
+            method: 'GET',
+            url: response.paging.next
+        }, function(err, res, body) {
+            addToLikes(JSON.parse(body))
         });
     } catch (err) {
         if (err.name == "TypeError") {
             console.log("Finished paging.")
             batch += ']'
             console.log(batch)
-            http.post({
-                url: "https://graph.facebook.com",
-                data: JSON.stringify({'access_token': accessToken, 'batch': batch}),
-                onload: function(response) {
-                    console.log(response)
-                    total_likes += response.summary.total_count
+            request({
+                    method: 'POST',
+                    url: 'https://graph.facebook.com',
+                    json: {
+                        'access_token': accessToken,
+                        'batch': batch
+                    }
+                },
+                function(err, res, body) {
+                    console.log(body)
+                    total_likes += body.summary.total_count
                     posts += 1
                     $('#post_number').text(posts)
                     $('#total_likes_field').text(total_likes)
-                }
-            })
+                })
         }
     }
 }
