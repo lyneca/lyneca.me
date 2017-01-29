@@ -93,8 +93,16 @@
                     "fields": "id"
                 },
                 function(response) {
-                  for (var i = 0; i < response.data.length; i++)
-                    $("#posts").append("<li>" + response.data[i].id + "</li>");
+                    for (var i = 0; i < response.data.length; i++)
+                        FB.api(
+                            '/' + response.data[i] + '/likes',
+                            'GET', {
+                              'summary': 'true'
+                            },
+                            function (response) {
+                              $('#posts').append('<li>' + response.summary.total_count + '</li>')
+                            }
+                        );
                 }
             );
         }
