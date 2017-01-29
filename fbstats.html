@@ -5,95 +5,18 @@
     <link href="default.css" type="text/css" rel="stylesheet" />
     <script src="http.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="fbstats.js"></script>
     <title>Facebook Statistics</title>
 </head>
 
 <body>
+    <div id="post_number">
+        Posts counted: 0
+    </div>
+    Total Likes
     <div id="total_likes_field">
         0
     </div>
-    <script>
-        var total_likes = 0;
-        var page = 0
-        function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response);
-            if (response.status === 'connected') {
-                testAPI();
-            } else if (response.status === 'not_authorized') {
-                document.getElementById('status').innerHTML = 'Please log ' +
-                    'into this app.';
-            } else {
-                document.getElementById('status').innerHTML = 'Please log ' +
-                    'into Facebook.';
-            }
-        }
-
-        function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-            });
-        }
-
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '163056174189679',
-                cookie: true,
-                xfbml: true,
-                version: 'v2.8'
-            });
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-            });
-
-        };
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        function addToLikes(response) {
-            for (var i = 0; i < response.data.length; i++) {
-                FB.api(
-                    '/' + response.data[i].id + '/likes',
-                    'GET', {
-                        'summary': 'true'
-                    },
-                    function(response) {
-                        total_likes += response.summary.total_count
-                        $('#total_likes_field').text(total_likes)
-                    }
-                );
-            }
-            page += 1
-            console.log("Page " + page)
-            try {
-                http.get({url: response.paging.next, onload: function() {addToLikes(JSON.parse(this.responseText))}});
-            } catch (err) {
-              if (err.name == "TypeError") {
-                console.log("Finished paging.")
-              }
-            }
-        }
-
-        function testAPI() {
-            console.log('Getting post list...');
-
-            FB.api(
-                '/me/posts/',
-                'GET',
-                {
-                    "limit": "275",
-                    "fields": "id"
-                },
-                addToLikes
-            );
-        }
-    </script>
     <fb:login-button scope="public_profile,user_friends,user_posts" onlogin="checkLoginState();">
     </fb:login-button>
     <div id="status">
