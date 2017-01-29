@@ -1,3 +1,5 @@
+console.log('version 1')
+
 var total_likes = 0;
 var page = 0
 var posts = 0
