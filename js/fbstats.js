@@ -56,15 +56,24 @@ function statusChangeCallback(response) {
     if (response.status === 'connected') {
         console.log("Connected.");
         countLikes();
-        $(this).animate({
+        $('#fb_login_button').animate({
             backgroundColor: '#3b9859'
-        }, 200);
+        }, 200, function() {
+            $(this).animate({
+                backgroundColor: '#3b5998'
+            }, 200);
+        });
     } else if (response.status === 'not_authorized') {
-        document.getElementById('status').innerHTML = 'Please log ' +
-            'into this app.';
+        console.log('Please log into this app.');
+        $('#fb_login_button').animate({
+            backgroundColor: '#98292b'
+        }, 200, function() {
+            $(this).animate({
+                backgroundColor: '#3b5998'
+            }, 200);
+        });
     } else {
-        document.getElementById('status').innerHTML = 'Please log ' +
-            'into Facebook to use this app.';
+        console.log('Please log into Facebook to use this app.');
     }
 }
 
@@ -84,8 +93,8 @@ window.fbAsyncInit = function() {
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
     });
-
 };
+
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;

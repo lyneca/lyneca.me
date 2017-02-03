@@ -8,6 +8,20 @@
     <script src="js/http.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js/jquery.color.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-database.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBmW_ueqqE3hFMNwvidQmWvRJdZZuT4e3o",
+        authDomain: "facebook-statistics-28dba.firebaseapp.com",
+        databaseURL: "https://facebook-statistics-28dba.firebaseio.com",
+        storageBucket: "facebook-statistics-28dba.appspot.com",
+        messagingSenderId: "821847499346"
+      };
+      firebase.initializeApp(config);
+    </script>
     <script src="js/fbstats.js"></script>
     <title>Facebook Statistics</title>
 </head>
@@ -35,7 +49,12 @@
         <span id="likes_text">Total Likes</span><br />
         <span id="total_likes_field">0</span><span id="slash">/</span><span id="post_number">0</span><br />
         (an average of ~ <span id="likes_per_post">0</span> likes per post)
-        <div id="status"></div>
+        <div id="desc">
+          This page looks through all of your posts and counts the number of likes you've gotten.<br />
+          If it stops working, that probably means that you've exceeded your
+          <a href="https://developers.facebook.com/docs/graph-api/advanced/rate-limiting">Facebook API quota</a>
+          - try again later.
+        </div>
     </div>
     <div id="footer">
       <a href="/privacy.html">privacy</a> | <a href="https://github.com/lyneca/lyneca.me">source</a>

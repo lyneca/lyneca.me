@@ -70,9 +70,13 @@ h1 {
   font-size: 30px;
 }
 
+#desc {
+  margin-top: 40px;
+}
+
 a:link, a:active, a:visited {
   text-decoration: none;
-  color: rgb(150, 150, 150);
+  color: rgb(170, 170, 170);
 }
 
 a {
@@ -80,7 +84,7 @@ a {
 }
 
 a:hover {
-  color: rgb(200, 200, 200);
+  color: rgb(220, 220, 220);
 }
 
 div {
